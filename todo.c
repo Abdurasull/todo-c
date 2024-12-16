@@ -101,12 +101,27 @@ void delete_task_by_id(){
     // ID raqamini kiritish uchun o`zgaruvchi
     int n;
 
+
     printf("O`chirmoqchi bo`lgan vazifani ni ID raqamini kiriting: ");
     scanf("%d", &n);
-
-    tasks[n - 1].status = -1;
-    printf("Task deleted successfully!\n");
-};
+    if ((n - 1 <= count) && (count != 0))
+    {
+        if (tasks[n-1].status != -1)
+        {
+            tasks[n - 1].status = -1;
+            printf("Task deleted successfully!\n");
+        } else
+        {
+            printf("Bu ID allaqachon o`chirilgan");
+        }
+        
+        
+    }else
+    {
+        printf("Bunday ID da vazifa kiritilmagan!\nIltimos boshqa ID kiriting: ");
+    }
+    
+    };
 
 // mark_task_completed - Vazifani "Completed" deb belgilash
 void mark_task_completed(){
@@ -116,13 +131,21 @@ void mark_task_completed(){
     printf("Bajarilgan vazifani ni ID raqamini kiriting: ");
     scanf("%d", &n);
 
-    while (tasks[n - 1].status == 1)
+    if (n - 1 <= count && count != 0)
     {
-        printf("Bu vazifa bajarilgan!\nIltimos, boshqa vazifa ID sini kiriting: ");
-        scanf("%d", &n);
+        while (tasks[n - 1].status == 1)
+        {
+            printf("Bu vazifa bajarilgan!\nIltimos, boshqa vazifa ID sini kiriting: ");
+            scanf("%d", &n);
+        }
+        tasks[n - 1].status = 1;
+        printf("Vazifa bajarildi deb bilgilandi :)\n");
+    }else
+    {
+        printf("Bunday ID da vazifa mavjud emas, iltimos boshqa ID ni kiriting!\n");
     }
-    tasks[n - 1].status = 1;
-    printf("Vazifa bajarildi deb bilgilandi :)\n");
+    
+    
 };
 
 // mark_task_incomplete - Vazifani "Incomplete" deb belgilash
@@ -132,16 +155,21 @@ void mark_task_incomplete(){
 
     printf("Bajarilmagan vazifani ni ID raqamini kiriting: ");
     scanf("%d", &n);
-
-    while (tasks[n - 1].status == 0)
+    if (n - 1 <= count && count != 0)
     {
-        printf("Bu vazifa shundog` ham bajarilmagan!\nIltimos, boshqa vazifa ID sini kiriting: ");
-        scanf("%d", &n);
-    }
+        while (tasks[n - 1].status == 0)
+        {
+            printf("Bu vazifa shundog` ham bajarilmagan!\nIltimos, boshqa vazifa ID sini kiriting: ");
+            scanf("%d", &n);
+        }
 
-    tasks[n - 1].status = 0;
-    printf("Vazifa bajarilmadi deb bilgilandi :(\n");
-};
+        tasks[n - 1].status = 0;
+        printf("Vazifa bajarilmadi deb bilgilandi :(\n");
+    }else
+        {
+            printf("Bunday ID da vazifa mavjud emas, iltimos boshqa ID ni kiriting!\n");
+        }
+    };
 
 // show_menu - Foydalanuvchiga menyuni ko'rsatish
 void show_menu(void){
